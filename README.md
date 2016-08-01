@@ -1,0 +1,2 @@
+# lotteryapi
+Polish recipit api
