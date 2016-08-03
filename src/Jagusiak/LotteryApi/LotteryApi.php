@@ -375,9 +375,10 @@ class LotteryForm {
      * @throws Exception
      */
     private function prepareCaptcha(&$params) {
-        if (empty($params['captcha'] = $this->captcha)) {
+        if (empty($this->captcha)) {
             throw new Exception("Captcha not solved!");
         }
+        $params['captcha'] = $this->captcha;
     }
 
     /**
@@ -386,9 +387,10 @@ class LotteryForm {
      * @throws Exception
      */
     private function prepareNIP(&$params) {
-        if (empty($params['nip'] = $this->nip)) {
+        if (empty($this->nip)) {
             throw new Exception("NIP is not set!");
         }
+        $params['nip'] = $this->nip;
     }
 
     /**
@@ -398,9 +400,10 @@ class LotteryForm {
      */
     private function prepareDate(&$params) {
         foreach (array('year' => 'rok', 'month' => 'miesiac', 'day' => 'dzien') as $field => $receiptField) {
-            if (empty($params[$receiptField] = $this->$field)) {
+            if (empty($this->$field)) {
                 throw new Exception("Year is not set!");
             }
+            $params[$receiptField] = $this->$field;
         }
     }
 
@@ -410,9 +413,10 @@ class LotteryForm {
      * @throws Exception
      */
     private function prepareRecipitNumber(&$params) {
-        if (empty($params['nr_wydruku'] = $this->receiptNumber)) {
+        if (empty($this->receiptNumber)) {
             throw new Exception("Recipit number is not set!");
         }
+        $params['nr_wydruku'] = $this->receiptNumber;
     }
 
     /**
@@ -443,9 +447,10 @@ class LotteryForm {
      * @throws Exception
      */
     private function prepareEmail(&$params) {
-        if (empty($params['email'] = $this->email)) {
+        if (empty($this->email)) {
             throw new Exception("Email is not set!");
         }
+        $params['email'] = $this->email;
     }
 
     /**
@@ -454,9 +459,10 @@ class LotteryForm {
      * @throws Exception
      */
     private function preparePhone(&$params) {
-        if (empty($params['nr_tel'] = $this->phone)) {
+        if (empty($this->phone)) {
             throw new Exception("Phone is not set!");
         }
+        $params['nr_tel'] = $this->phone;
     }
 
     /**
@@ -465,9 +471,10 @@ class LotteryForm {
      * @throws Exception
      */
     private function prepareDeviceNumber(&$params) {
-        if (empty($params['nr_kasy'] = $this->deviceNumber)) {
+        if (empty($this->deviceNumber)) {
             throw new Exception("Device number is not set!");
         }
+        $params['nr_kasy'] = $this->deviceNumber;
     }
 
     /**
