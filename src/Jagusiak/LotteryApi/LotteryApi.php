@@ -174,11 +174,11 @@ class LotteryForm {
      * 
      * @param int|string $nip (10 digits number)
      * @return \LotteryForm
-     * @throws Exception
+     * @throws \Exception
      */
     public function setNIP($nip) {
         if (!preg_match('/^\d{10}$/', $this->nip = (string) $nip)) {
-            throw new Exception("Incorrect nip");
+            throw new \Exception("Incorrect nip");
         }
         return $this;
     }
@@ -188,11 +188,11 @@ class LotteryForm {
      * 
      * @param int|string $phone 9 digits, only polish numbers
      * @return \LotteryForm
-     * @throws Exception
+     * @throws \Exception
      */
     public function setPhone($phone) {
         if (!preg_match('/^\d{9}$/', $this->phone = (string) $phone)) {
-            throw new Exception("Incorrect phone");
+            throw new \Exception("Incorrect phone");
         }
         return $this;
     }
@@ -205,13 +205,13 @@ class LotteryForm {
      * @see https://en.wikipedia.org/wiki/Polish_z�oty
      * 
      * @return \LotteryForm
-     * @throws Exception
+     * @throws \Exception
      */
     public function setPrice($price) {
-        if (!is_float($price) || (float) $price < 10.0) {
-            throw new Exception("Incorrect price");
+        if (!is_float($price) || floatval($price) < 10.0) {
+            throw new \Exception("Incorrect price");
         }
-        $this->price = (float) $price;
+        $this->price = floatval($price);
         return $this;
     }
 
@@ -220,11 +220,11 @@ class LotteryForm {
      * 
      * @param int|string $year year in format 1000-9999
      * @return \LotteryForm
-     * @throws Exception
+     * @throws \Exception
      */
     public function setYear($year) {
         if (!preg_match('/^\d{4}$/', $this->year = (string) $year)) {
-            throw new Exception("Incorrect year");
+            throw new \Exception("Incorrect year");
         }
         return $this;
     }
@@ -234,12 +234,12 @@ class LotteryForm {
      * 
      * @param int|string $month month in format (0)1-12
      * @return \LotteryForm
-     * @throws Exception
+     * @throws \Exception
      */
     public function setMonth($month) {
         $this->month = sprintf("%02d", (int) $month);
         if (!preg_match('/^[0-1]\d$/', $this->month)) {
-            throw new Exception("Incorrect month");
+            throw new \Exception("Incorrect month");
         }
         return $this;
     }
@@ -249,12 +249,12 @@ class LotteryForm {
      * 
      * @param int|string $day day in format (0)1-31
      * @return \LotteryForm
-     * @throws Exception
+     * @throws \Exception
      */
     public function setDay($day) {
         $this->day = sprintf("%02d", (int) $day);
         if (!preg_match('/^[0-3]\d$/', $this->day)) {
-            throw new Exception("Incorrect day");
+            throw new \Exception("Incorrect day");
         }
         return $this;
     }
@@ -265,11 +265,11 @@ class LotteryForm {
      * 
      * @param int|string $receiptNumber
      * @return \LotteryForm
-     * @throws Exception
+     * @throws \Exception
      */
     public function setReceiptNumber($receiptNumber) {
-        if (!is_int($receiptNumber) || (int) $receiptNumber < 1) {
-            throw new Exception("Incorrect receipt number");
+        if (!is_int($receiptNumber) || intval($receiptNumber) < 1) {
+            throw new \Exception("Incorrect receipt number");
         }
         $this->receiptNumber = $receiptNumber;
         return $this;
@@ -281,11 +281,11 @@ class LotteryForm {
      * 
      * @param string $deviceNumber
      * @return \LotteryForm
-     * @throws Exception
+     * @throws \Exception
      */
     public function setDeviceNumber($deviceNumber) {
         if (!preg_match('/^\w{8,13}$/', $this->deviceNumber = $deviceNumber)) {
-            throw new Exception("Incorrect device number");
+            throw new \Exception("Incorrect device number");
         }
         return $this;
     }
@@ -294,11 +294,11 @@ class LotteryForm {
      * 
      * @param type $brand
      * @return \LotteryForm
-     * @throws Exception
+     * @throws \Exception
      */
     public function setBrand($brand = '') {
         if (($this->brand = $brand) !== '' && !in_array($brand, $this->brands)) {
-            throw new Exception("Incorrect brand");
+            throw new \Exception("Incorrect brand");
         }
         return $this;
     }
@@ -307,11 +307,11 @@ class LotteryForm {
      * 
      * @param type $email
      * @return \LotteryForm
-     * @throws Exception
+     * @throws \Exception
      */
     public function setEmail($email) {
         if (!filter_var($this->email = $email, FILTER_VALIDATE_EMAIL)) {
-            throw new Exception("Incorrect email");
+            throw new \Exception("Incorrect email");
         }
         return $this;
     }
@@ -372,11 +372,11 @@ class LotteryForm {
     /**
      * 
      * @param array $params
-     * @throws Exception
+     * @throws \Exception
      */
     private function prepareCaptcha(&$params) {
         if (empty($this->captcha)) {
-            throw new Exception("Captcha not solved!");
+            throw new \Exception("Captcha not solved!");
         }
         $params['captcha'] = $this->captcha;
     }
@@ -384,11 +384,11 @@ class LotteryForm {
     /**
      * 
      * @param array $params
-     * @throws Exception
+     * @throws \Exception
      */
     private function prepareNIP(&$params) {
         if (empty($this->nip)) {
-            throw new Exception("NIP is not set!");
+            throw new \Exception("NIP is not set!");
         }
         $params['nip'] = $this->nip;
     }
@@ -396,12 +396,12 @@ class LotteryForm {
     /**
      * 
      * @param type $params
-     * @throws Exception
+     * @throws \Exception
      */
     private function prepareDate(&$params) {
         foreach (array('year' => 'rok', 'month' => 'miesiac', 'day' => 'dzien') as $field => $receiptField) {
             if (empty($this->$field)) {
-                throw new Exception("Year is not set!");
+                throw new \Exception("Year is not set!");
             }
             $params[$receiptField] = $this->$field;
         }
@@ -410,11 +410,11 @@ class LotteryForm {
     /**
      * 
      * @param array $params
-     * @throws Exception
+     * @throws \Exception
      */
     private function prepareRecipitNumber(&$params) {
         if (empty($this->receiptNumber)) {
-            throw new Exception("Recipit number is not set!");
+            throw new \Exception("Recipit number is not set!");
         }
         $params['nr_wydruku'] = $this->receiptNumber;
     }
@@ -422,11 +422,11 @@ class LotteryForm {
     /**
      * 
      * @param type $params
-     * @throws Exception
+     * @throws \Exception
      */
     private function preparePrice(&$params) {
         if (empty($this->price)) {
-            throw new Exception("Price is not set!");
+            throw new \Exception("Price is not set!");
         }
 
         $params['kwota_zl'] = (int) floor($this->price);
@@ -444,11 +444,11 @@ class LotteryForm {
     /**
      * 
      * @param type $params
-     * @throws Exception
+     * @throws \Exception
      */
     private function prepareEmail(&$params) {
         if (empty($this->email)) {
-            throw new Exception("Email is not set!");
+            throw new \Exception("Email is not set!");
         }
         $params['email'] = $this->email;
     }
@@ -456,11 +456,11 @@ class LotteryForm {
     /**
      * 
      * @param array $params
-     * @throws Exception
+     * @throws \Exception
      */
     private function preparePhone(&$params) {
         if (empty($this->phone)) {
-            throw new Exception("Phone is not set!");
+            throw new \Exception("Phone is not set!");
         }
         $params['nr_tel'] = $this->phone;
     }
@@ -468,11 +468,11 @@ class LotteryForm {
     /**
      * 
      * @param array $params
-     * @throws Exception
+     * @throws \Exception
      */
     private function prepareDeviceNumber(&$params) {
         if (empty($this->deviceNumber)) {
-            throw new Exception("Device number is not set!");
+            throw new \Exception("Device number is not set!");
         }
         $params['nr_kasy'] = $this->deviceNumber;
     }
