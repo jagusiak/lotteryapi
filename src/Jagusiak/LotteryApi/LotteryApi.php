@@ -268,7 +268,7 @@ class LotteryForm {
      * @throws \Exception
      */
     public function setReceiptNumber($receiptNumber) {
-        if (!is_int($receiptNumber) || intval($receiptNumber) < 1) {
+        if (empty($receiptNumber)) {
             throw new \Exception("Incorrect receipt number");
         }
         $this->receiptNumber = $receiptNumber;
