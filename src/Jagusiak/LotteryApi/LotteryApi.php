@@ -346,7 +346,7 @@ class LotteryForm {
      * @return array json response data
      */
     public function submit() {
-        return LotteryHttpRequest::sendReceipt($this->postUrl, $this->token, $this->pre);
+        return LotteryHttpRequest::sendReceipt($this->postUrl, $this->token, $this->prepareParams());
     }
 
     /**
@@ -522,7 +522,7 @@ class LotteryHttpRequest {
             'x-requested-with:XMLHttpRequest',
         ));
 
-        return json_decode(self::retrieveContent($ch));
+        return json_decode(self::retrieveContent($ch), true);
     }
 
     /**
